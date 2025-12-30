@@ -1,11 +1,13 @@
-const togglePassword = document.getElementById("togglePassword");
-const password = document.getElementById("password");
+    const passwordInput = document.getElementById('password');
+    const toggleCheckbox = document.getElementById('togglePasswordCheckbox');
+    const toggleLabel = document.getElementById('togglePasswordLabel');
 
-togglePassword.addEventListener("click", () => {
-    const type =
-        password.getAttribute("type") === "password" ? "text" : "password";
-    password.setAttribute("type", type);
-
-    togglePassword.classList.toggle("bi-eye");
-    togglePassword.classList.toggle("bi-eye-slash");
-});
+    toggleCheckbox.addEventListener('change', function () {
+        if (this.checked) {
+            passwordInput.type = 'text';
+            toggleLabel.textContent = 'Hide Password';
+        } else {
+            passwordInput.type = 'password';
+            toggleLabel.textContent = 'Show Password';
+        }
+    });
