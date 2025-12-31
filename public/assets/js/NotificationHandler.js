@@ -52,11 +52,18 @@ class NotificationHandler {
     static validation(errors) {
         if (!errors) return;
 
+        // input.classList.remove('is-valid');
+
         Object.keys(errors).forEach(field => {
             const input = document.querySelector(`[name="${field}"]`);
             if (!input) return;
 
+            input.classList.remove('is-valid');
+
             input.classList.add('is-invalid');
+
+
+            // input.classList.add('is-invalid');
 
             let feedback = input.parentElement.querySelector('.invalid-feedback');
             if (!feedback) {

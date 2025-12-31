@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <title>High Bloom | Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/img/Light Mode Logo.png">
@@ -233,6 +235,22 @@
 
 
 
+        .form-control.is-invalid {
+            border-color: #ff4d4d !important;
+            box-shadow: 0 0 0 0.2rem rgba(255, 77, 77, 0.25);
+            background-image: none; /* remove bootstrap icon if unwanted */
+        }
+
+
+
+        .invalid-feedback {
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+
+
     </style>
 </head>
 
@@ -266,11 +284,11 @@
             <form class="needs-validation" novalidate>
                 @csrf
                 <div class="position-relative mb-3">
-                    <input type="email" class="form-control" placeholder="Email address" required>
+                    <input type="email" name="email" class="form-control" placeholder="Email address" required>
                     <div class="invalid-feedback">Email is required.</div>
                 </div>
                 <div class="position-relative mb-3">
-                    <input type="password" id="password" class="form-control" placeholder="Password" required>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
                     <div class="invalid-feedback">Password is required.</div>
                 </div>
                 <div class="options">
@@ -279,13 +297,21 @@
                         <span id="togglePasswordLabel">Show Password</span>
                     </label>
                 </div>
-                <button type="submit" data-url="user/login" class="btn btn-login w-100 submit-form">
+                <button type="submit" data-url="user/login" class="btn btn-login w-100 submit-form mb-3">
                     <span class="btn-text">Sign In</span>
                     <span class="spinner-border spinner-border-sm d-none ms-2"
                         role="status"
                         aria-hidden="true">
                     </span>
                 </button>
+
+
+                <div class="position-relative mb-3">
+                    <input type="hidden" name="commonError" id="commonError" class="form-control" placeholder="commonError" required>
+                    <div class="invalid-feedback text-center"></div>
+                </div>
+
+
             </form>
             <div class="footer">
                 © 2025 High Bloom Softwares. All rights reserved.
