@@ -39,15 +39,19 @@ class FormSubmit {
         text.textContent = 'Loading ';
 
         try {
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const response = await fetch(url, {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': token
                 }
             });
 
             const data = await response.json();
+
+            console.log('data =', data)
 
             if (!response.ok) {
                 throw data;
@@ -74,6 +78,8 @@ class FormSubmit {
             button.innerHTML = originalText;
         }
     }
+
+    
 }
 
 document.addEventListener('DOMContentLoaded', () => {

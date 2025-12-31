@@ -24,6 +24,15 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+
+
+    
+
+
+
+
+
+
     public function rules(): array
     {
         return [
@@ -45,7 +54,8 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'commonError' => trans('auth.failed'),
+         
             ]);
         }
 
