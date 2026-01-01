@@ -1,0 +1,18 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Modules\User\app\Http\Controllers\UserController;
+
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('users', UserController::class)->names('user');
+});
+
+
+Route::middleware(['web', 'auth'])
+    ->prefix('user')
+    ->name('user.')
+    ->group(function () {
+        Route::get('/profile', [UserController::class, 'index'])
+            ->name('profile');
+    });

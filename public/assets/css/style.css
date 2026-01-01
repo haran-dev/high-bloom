@@ -150,7 +150,9 @@ h6 {
 }
 
 .dropdown-menu .dropdown-item:hover {
-  background-color: #f6f9ff;
+  color: #0077d1 !important;
+  background: #0f2950 !important;
+  font-weight: 700 !important;
 }
 
 @media (min-width: 768px) {
@@ -1255,7 +1257,5 @@ button:disabled {
     cursor: not-allowed;
     opacity: 0.8;
 }
-
-
 
 
