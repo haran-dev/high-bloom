@@ -4,13 +4,20 @@
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
-            <li class="nav-item">
-                <a class="nav-link " href="index.html">
-                    <i class="bi bi-grid"></i>
+            <li class="nav-item ">
+                <a class="nav-link {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}" href="/dashboard">
+                    <i class="bi bi-grid active"></i>
                     <span>Dashboard</span>
                 </a>
-            </li><!-- End Dashboard Nav -->
+            </li>
 
+
+            <li class="nav-item ">
+                <a class="nav-link {{ Route::currentRouteName() == 'company.company' ? 'active' : '' }}" href="/company">
+                    <i class="bi bi-buildings"></i>
+                    <span>Company</span>
+                </a>
+            </li>
 
         </ul>
 

@@ -29,80 +29,78 @@
                 </a>
             </li><!-- End Search Icon-->
 
-            <li class="nav-item dropdown">
+            @php
+                $notifications = auth()->user()->unreadNotifications()->take(6)->get();
+            @endphp
 
+            <li class="nav-item dropdown">
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                     <i class="bi bi-bell"></i>
-                    <span class="badge bg-primary badge-number">4</span>
-                </a><!-- End Notification Icon -->
+                    <span class="badge bg-primary badge-number" id="notification-count" 
+                        @if($notifications->count() == 0) style="display:none;" @endif>
+                        {{ $notifications->count() }}
+                    </span>
+                </a>
 
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                    <li class="dropdown-header">
-                        You have 4 new notifications
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"  id="notification-list">
+                    @if($notifications->count() > 0)
+                        <li class="dropdown-header" id="notification-header-data">
+                            <div class="notification-para mb-3">
+                                You have <span id="notification-count-header">{{ $notifications->count() }}</span> new notifications                          
+                            </div>
 
-                    <li class="notification-item">
-                        <i class="bi bi-exclamation-circle text-warning"></i>
-                        <div>
-                            <h4>Lorem Ipsum</h4>
-                            <p>Quae dolorem earum veritatis oditseno</p>
-                            <p>30 min. ago</p>
-                        </div>
-                    </li>
+                            <div class="allreadbtn text-left">
+                                <a href="#" id="mark-all-read" class="text-left">
+                                    Mark all as read
+                                </a>
+                            
+                            </div>
 
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                            
 
-                    <li class="notification-item">
-                        <i class="bi bi-x-circle text-danger"></i>
-                        <div>
-                            <h4>Atque rerum nesciunt</h4>
-                            <p>Quae dolorem earum veritatis oditseno</p>
-                            <p>1 hr. ago</p>
-                        </div>
-                    </li>
 
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                        
+                            
+                            
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                    @endif
 
-                    <li class="notification-item">
-                        <i class="bi bi-check-circle text-success"></i>
-                        <div>
-                            <h4>Sit rerum fuga</h4>
-                            <p>Quae dolorem earum veritatis oditseno</p>
-                            <p>2 hrs. ago</p>
-                        </div>
-                    </li>
+                    @forelse($notifications as $notification)
+                        <li class="notification-item" id="notification-{{ $notification->id }}">
+                            <i class="bi bi-info-circle text-primary"></i>
 
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                            <div class="notification-content">
+                                <h4>{{ $notification->data['title'] ?? 'Notification' }}</h4>
+                                <p>{{ $notification->data['message'] }}</p>
+                                <!-- <p class="small" style="color: grey;">
+                                    {{ $notification->created_at->diffForHumans() }}
+                                </p> -->
+                                <p class="time-ago" style="color: grey;" data-time="{{ $notification->created_at->toIso8601String() }}">
+                                    just now
+                                </p>
 
-                    <li class="notification-item">
-                        <i class="bi bi-info-circle text-primary"></i>
-                        <div>
-                            <h4>Dicta reprehenderit</h4>
-                            <p>Quae dolorem earum veritatis oditseno</p>
-                            <p>4 hrs. ago</p>
-                        </div>
-                    </li>
+                            </div>
 
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                            <span  class="mark-read-btn"
+                                data-id="{{ $notification->id }}"
+                                title="Mark as read" style="cursor: pointer;">
+                                <i class="bi bi-check-square" style="color: #3aa0ff;"></i>
+                            </span>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                    @empty
+                        <li class="text-center p-3">No Notifications</li>
+                    @endforelse
+
+                    <li class="text-center p-3 d-none" id="empty-notification">No Notifications</li>
+
                     <li class="dropdown-footer">
-                        <a href="#">Show all notifications</a>
+                        <a href="">Show all notifications</a>
                     </li>
+                </ul>
+            </li>
 
-                </ul><!-- End Notification Dropdown Items -->
-
-            </li><!-- End Notification Nav -->
 
             <li class="nav-item dropdown">
 
@@ -173,14 +171,16 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="{{ asset('assets/img/profile-img.jfif') }}"   alt="Profile" class="rounded-circle">
+                    <img src="{{ $authUser->profile_img 
+                    ? asset('storage/' . $authUser->profile_img) 
+                    : asset('assets/img/profile-icon.png') }}"    alt="Profile" class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
                         <h6>{{ Auth::user()->name }}</h6>
-                        <span>Admin</span>
+                        <span>{{ Auth::user()->job }}</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">

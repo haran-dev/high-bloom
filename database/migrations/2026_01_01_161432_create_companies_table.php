@@ -19,7 +19,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->string('company_name');
-            $table->string('job')->nullable();
+            // $table->string('job')->nullable();
             $table->string('country')->nullable();
             $table->text('address')->nullable();
             $table->string('phone')->nullable();

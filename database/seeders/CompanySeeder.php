@@ -17,8 +17,8 @@ class CompanySeeder extends Seeder
         DB::table('companies')->insert([
             [
                 'user_id'     => 1,
-                'company_name'=> 'High Bloom Pvt Ltd',
-                'job'         => 'Owners',
+                'company_name'=> 'High Bloom (Pvt) Ltd',
+                // 'job'         => 'Super Admin',
                 'country'     => 'Sri Lanka',
                 'address'     => '274, Anbuvali puram, Trincomalee, Sri Lanka',
                 'phone'       => '+94 70 226 3525',
