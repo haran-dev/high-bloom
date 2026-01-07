@@ -5,18 +5,13 @@
     <title>High Bloom | Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/img/Light Mode Logo.png">
-
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
     <!-- Bootstrap -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-
     <style>
         :root {
             --blue-main: #4dabff;
@@ -253,7 +248,6 @@
 
     </style>
 </head>
-
 <body>
 
     <!-- Screen Loader -->
@@ -263,12 +257,7 @@
         </div>
     </div>
 
-
-
     <div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer"></div>
-
-
-    <!-- Background (NO SCROLLBAR FIXED) -->
     <div class="bg-effects">
         <div class="orb one"></div>
         <div class="orb two"></div>
@@ -318,13 +307,10 @@
             </div>
         </div>
     </div>
+
+    <!-- scripts -->
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/passwordToggle.js"></script>
-    <script src="assets/js/validation.js"></script>
-    <script src="assets/js/notificationHandler.js"></script>
-    <script src="assets/js/formSubmit.js"></script>
-
-
+    <script type="module" src="{{ asset('assets/js/app.js') }}"></script>
     <script>
         window.addEventListener('load', () => {
             const loader = document.getElementById('pageLoader');
@@ -339,6 +325,5 @@
             }
         });
     </script>
-
 </body>
 </html>

@@ -21,7 +21,18 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'about',
+        'country',
+        'address',
+        'phone',
+        'twitter',
+        'facebook',
+        'instagram',
+        'linkedin',
+        'profile_img',
+        'job',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,4 +56,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    public function companies()
+    {
+        return $this->hasMany(Company::class);
+    }
+
 }
